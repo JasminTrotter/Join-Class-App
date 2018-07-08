@@ -6,12 +6,22 @@
     "test": "mocha --exit"
   },
   "dependencies": {
+    "auth": "0.0.9",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^6.0.0",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
-    "morgan": "~1.9.0"
+    "jsonwebtoken": "^8.3.0",
+    "listen": "^1.0.1",
+    "mongoose": "^5.2.1",
+    "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "users": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
