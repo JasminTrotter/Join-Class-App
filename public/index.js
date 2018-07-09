@@ -2,8 +2,19 @@
 function listenSignIn() {
 	$('.signin').submit(function(event) {
 		event.preventDefault();
-		$('.signin').remove();
-		generateReservationList();
+		const username = $('.username').val();
+		const password = $('.password').val();
+		
+		const login = {
+			'username': username,
+			'password': password
+		}
+
+		const endpoint = 'http://localhost:8080/api/users';
+
+		$.getJSON(endpoint, login,  generateReservationList)
+
+		
 	});
 	
 }
