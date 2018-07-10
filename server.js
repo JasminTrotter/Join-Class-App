@@ -6,19 +6,12 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const passport = require('passport');
 
-// Here we use destructuring assignment with renaming so the two variables
-// called router (from ./users and ./auth) have different names
-// For example:
-// const actorSurnames = { james: "Stewart", robert: "De Niro" };
-// const { james: jimmy, robert: bobby } = actorSurnames;
-// console.log(jimmy); // Stewart - the variable name is jimmy, not james
-// console.log(bobby); // De Niro - the variable name is bobby, not robert
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 
 const { DATABASE_URL, PORT } = require('./config');
-//const { BlogPost } = require('./models');
+const { Reservations } = require('./models');
 
 const app = express();
 
@@ -27,6 +20,9 @@ app.use(morgan('common'));
 
 app.use(express.json());
 //app.use(express.static('public'));
+
+const jwt = require('jsonwebtoken');
+const config = require('./config');
 
 // CORS
 app.use(function (req, res, next) {
@@ -47,22 +43,49 @@ app.use('/api/auth/', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-// A protected endpoint which needs a valid JWT to access it
-app.get('/api/protected', jwtAuth, (req, res) => {
-  return res.json({
-    data: 'rosebud'
-  });
+
+//PROTECTED ENDPOINTS
+
+//A protected endpoint to create reservation
+app.post('/api/join-a-class', jwtAuth, (req, res) => {
+//  jwt.verify(req.token, config.JWT_SECRET, (err) => {
+//    if(err) {
+//     res.sendStatus(403);
+//    } else {
+
+//    }
+
+        Reservations.create({
+        id: req.body.id,
+        class: req.body.class,
+        time: req.body.time, 
+        day: req.body.day,
+        date: req.body.date,
+        location: req.body.location
+  })
+  .then((post) => {
+    res.json(post.serialize())
+  }); 
 });
 
 
+//A protected endpoint to view current reservations
+app.get('/api/current-reservations', jwtAuth, (req, res) => {
+    Reservations
+    .find()
+    .then(posts => {
+      res.json(posts.map(post => post.serialize()));
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
 
-
-
-
-
-
-
-
+app.delete('/api/current-reservations/:id', jwtAuth, (req, res) => {
+  Reservations.findByIdAndRemove(req.params.id)
+  .then(result => res.json(result))
+});
 
 
 
