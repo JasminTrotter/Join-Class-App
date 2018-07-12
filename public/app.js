@@ -1,53 +1,6 @@
-var classSchedule = [
-		{
-			class: "Barre and Center",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 15",
-			location: "Moonstar Dance Studio"
-		},
-		{
-			class: "Barre and Center",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 22",
-			location: "Moonstar Dance Studio"
-		},
-		{
-			class: "Barre and Center",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 29",
-			location: "Moonstar Dance Studio"
-		},
-		{
-			class: "A",
-			time: "A",
-			day: "A",
-			date: "A",
-			location: "A"
-		},
-		{
-			class: "B",
-			time: "B",
-			day: "B",
-			date: "B",
-			location: "B"
-		},
-		{
-			class: "C",
-			time: "C",
-			day: "C",
-			date: "C",
-			location: "C"
-		}
-	];
-
-
-
 //listen for when user submits login form and calls login with the credentials entered on the form
-function listenSignIn() {
-	$('.signin').submit(event => {
+function listenLogin() {
+	$('.login-form').submit(event => {
 		event.preventDefault();
 		let userCreds = {
       		username: $(".username").val(),
@@ -58,6 +11,72 @@ function listenSignIn() {
   	});
 
 }
+
+//If the user has no account yet, this button will take them to a Sign Up form
+function listenSignupBtn() {
+	$('.signup-button').on('click', event => {
+		$('.signup-container').removeClass('hidden');
+		$('.login-form').addClass('hidden');
+		listenSigninBtn();
+		listenSignupForm();
+	});
+}
+
+//On the Sign Up form page, 
+//there is a button for the user to go back to the log in form 
+//if they aready have an account (page reloads)
+function listenSigninBtn() {
+	$('.signin-button').on('click', event => {
+		location.reload();
+	});
+}
+
+
+//listens for when user submits signup form
+function listenSignupForm() {
+  $(".signup-form").on("submit", event => {
+    event.preventDefault();
+    let password = $(".new-password").val();
+    let username = $(".new-username").val();
+    //if password is too short, show warning
+    
+      let newUserCreds = {
+        firstName: $(".firstname").val(),
+        lastName: $(".lastname").val(),
+        username: username,
+        password: password
+      };
+      createUser(newUserCreds);
+    });
+}
+
+function createUser(newUserCreds) {
+  let userCreds = {
+    firstName: newUserCreds.firstName,
+    username: newUserCreds.username,
+    password: newUserCreds.password
+  };
+  //post new user data
+  $.ajax({
+    url: "http://localhost:8080/api/users",
+    method: "POST",
+    data: JSON.stringify(newUserCreds),
+    crossDomain: true,
+    contentType: "application/json",
+    //on success, call showSuccessBox
+    success: () => {
+      showSuccessBox(userCreds);
+    },
+    //if error, call userDuplicate
+    error: userDuplicate
+  });
+}
+
+//warn that username is already taken
+function userDuplicate() {
+  $(".userwarn").html("Username already taken");
+}
+
 
 //sends POST request to api/auth/login
 function login(userCreds) {
@@ -71,6 +90,7 @@ function login(userCreds) {
     success: loginSuccess,
    	error: loginFailMessage
   });
+
 }
 
 
@@ -82,9 +102,10 @@ function loginFailMessage() {
 
 //if login succeeds, create token and call 
 function loginSuccess(response) {
-  localStorage.setItem("TOKEN", response.authToken);
-  newToken();
-  showReservationList();
+	$('.login-form').addClass('hidden');
+ 	localStorage.setItem("TOKEN", response.authToken);
+ 	newToken();
+ 	showReservationList();
 }
 
 //sets up token in header for ajax requests so user can access their account and data
@@ -170,14 +191,14 @@ function isLoggedIn() {
   return localStorage.getItem("TOKEN");
 }
 
-/*
+
 //listen for when user clicks "Log Out", removes JWT token from local storage, and reloads the page
 function listenLogout() {
   $(".logout-button").on("click", event => {
     localStorage.removeItem("TOKEN");
     location.reload();
   });
-}*/
+}
 
 
 
@@ -196,13 +217,10 @@ function generateFormInputs() {
 //sends a POST request of the selected class
 function listenJoinBtn() {
 	$('.join-class').on('click', function(event){
-		//refreshReservationList();
-
 		$('.list-container2').html(
 			`<h2>Class Schedule</h2>
 			<form id="join-form" action="http://localhost:8080/api/join-a-class" method="post"></form>			
 			<button type="submit" form="join-form">Join This Class</button>`);
-	//newToken();
 	generateFormInputs();	
 	listenSchedSubmit();	
 	});
@@ -224,7 +242,7 @@ function listenSchedSubmit() {
 		postUsersSelection(usersSelection);
 
 		//refreshReservationList()
-		$('.app-container').find('.reservation-list').empty();
+		$('body').find('.reservation-list').empty();
 		getReservationData(generateListItems);
 		listenJoinBtn();
 
@@ -262,5 +280,10 @@ function resetJoinForm() {
 }
 
 
+function handleApp() {
+	listenLogin();
+	listenSignupBtn();
+	listenLogout();
+}
 
-$(listenSignIn);
+$(handleApp);
