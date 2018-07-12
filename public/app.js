@@ -53,6 +53,7 @@ function listenSignupForm() {
 function createUser(newUserCreds) {
   let userCreds = {
     firstName: newUserCreds.firstName,
+    lastName: newUserCreds.lastName,
     username: newUserCreds.username,
     password: newUserCreds.password
   };
@@ -242,10 +243,10 @@ function listenSchedSubmit() {
 		postUsersSelection(usersSelection);
 
 		//refreshReservationList()
-		$('body').find('.reservation-list').empty();
-		getReservationData(generateListItems);
-		listenJoinBtn();
-
+		//$('body').find('.reservation-list').empty();
+		//getReservationData(generateListItems);
+		//listenJoinBtn();
+		
 		resetJoinForm();
 	});
 	
@@ -266,7 +267,8 @@ function postUsersSelection(usersSelection) {
     	method: "POST",
     	data: JSON.stringify(obj),
     	contentType: "application/json",
-    	success: alert('You have successfully joined ' + usersSelection[0] + ', at ' + usersSelection[1] + ' on ' + usersSelection[2] + ', ' + usersSelection[3] + '.')  	
+    	//success: alert('You have successfully joined ' + usersSelection[0] + ', at ' + usersSelection[1] + ' on ' + usersSelection[2] + ', ' + usersSelection[3] + '.')  	
+		success: refreshReservationList
 	};
 
 	$.ajax(settings);
