@@ -1,6 +1,53 @@
+var classSchedule = [
+		{
+			class: "Barre and Center",
+			time: "3pm",
+			day: "Sunday",
+			date: "July 15",
+			location: "Moonstar Dance Studio"
+		},
+		{
+			class: "Barre and Center",
+			time: "3pm",
+			day: "Sunday",
+			date: "July 22",
+			location: "Moonstar Dance Studio"
+		},
+		{
+			class: "Barre and Center",
+			time: "3pm",
+			day: "Sunday",
+			date: "July 29",
+			location: "Moonstar Dance Studio"
+		},
+		{
+			class: "A",
+			time: "A",
+			day: "A",
+			date: "A",
+			location: "A"
+		},
+		{
+			class: "B",
+			time: "B",
+			day: "B",
+			date: "B",
+			location: "B"
+		},
+		{
+			class: "C",
+			time: "C",
+			day: "C",
+			date: "C",
+			location: "C"
+		}
+	];
+
+
+
 //listen for when user submits login form and calls login with the credentials entered on the form
 function listenSignIn() {
-	$('.signin').submit(function(event) {
+	$('.signin').submit(event => {
 		event.preventDefault();
 		let userCreds = {
       		username: $(".username").val(),
@@ -12,7 +59,7 @@ function listenSignIn() {
 
 }
 
-//sends POST request to auth/login
+//sends POST request to api/auth/login
 function login(userCreds) {
 	console.log(userCreds);
   $.ajax({
@@ -62,25 +109,60 @@ function showReservationList() {
 
 //GET the user's current reservations
 function getReservationData(callback) {
-	const settings = {
+	$.ajax({
 		url: 'http://localhost:8080/api/current-reservations',
     	method: 'GET',
     	dataType: 'json',
     	success: callback
-	}
-	$.ajax(settings);
+	});
 }	
 
 
+
+
 //generate CURRENT RESERVATIONS list items, 
-//this is creating a list item for each of the objects in the response
+//this is creating a list item for each of the objects in the response, 
+//and appending them to the Current Reservations list
 function generateListItems(data) {
 	for (let i=0; i<data.length; i++) {		
-		const listItem = `<li>${data[i].class}, ${data[i].time}, ${data[i].day}, ${data[i].date}</li>`
-		$('.list-placeholder').append(listItem);
+		const listItem = `<li class="list-item">${data[i].class}, ${data[i].time}, ${data[i].day}, ${data[i].date} <button class="cancel-res" id="${data[i].id}">Cancel</button></li>`
+		$('.reservation-list').append(listItem);
 		console.log(listItem);
+		//listenCancelBtn();
 	}
+	listenCancelBtn();
 }
+
+
+
+function refreshReservationList() {
+	$('.app-container').find('.reservation-list').empty();
+	getReservationData(generateListItems);
+	listenJoinBtn();
+}
+
+
+//when user clicks "cancel" button, sends request to delete the list item with that id
+function listenCancelBtn() {
+	$('.cancel-res').on('click', event => {
+
+		//grab id from the button, which is the same id as the item to be deleted
+		const itemId = event.currentTarget.id;
+
+		newToken();
+		$.ajax({
+			url: 'http://localhost:8080/api/current-reservations/' + itemId,
+			method: "DELETE",
+			success: () => {
+				refreshReservationList();
+			}
+		});
+		
+	});
+
+}
+
+
 
 
 //checks if JWT token is already in local storage
@@ -95,34 +177,9 @@ function listenLogout() {
     localStorage.removeItem("TOKEN");
     location.reload();
   });
-}
-
-*/
+}*/
 
 
-var classSchedule = [
-		{
-			class: "Barre and Center",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 15",
-			location: "Moonstar Dance Studio"
-		},
-		{
-			class: "Barre and Center",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 22",
-			location: "Moonstar Dance Studio"
-		},
-		{
-			class: "Barre and Center",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 29",
-			location: "Moonstar Dance Studio"
-		}
-	];
 
 
 
@@ -130,23 +187,21 @@ var classSchedule = [
 function generateFormInputs() {
 	for (let i=0; i<classSchedule.length; i++) {		
 		const input = `<input type="radio" value="${classSchedule[i].class},${classSchedule[i].time},${classSchedule[i].day},${classSchedule[i].date}">${classSchedule[i].class}, ${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}`
-		$('.form-placeholder').append(input);
+		$('#join-form').append(input);
 		console.log(input);
+	}
 }
 
-
-
-}
-//listen `join more classes` button
+//listen for click on `join more classes` button 
+//sends a POST request of the selected class
 function listenJoinBtn() {
 	$('.join-class').on('click', function(event){
+		//refreshReservationList();
+
 		$('.list-container2').html(
-			`<form class="class-schedules" action="http://localhost:8080/api/join-a-class" method="post">
-			Class Schedule
-			<span class="form-placeholder"></span>
-			
-			<button type="submit">Submit</button>
-			</form>`);
+			`<h2>Class Schedule</h2>
+			<form id="join-form" action="http://localhost:8080/api/join-a-class" method="post"></form>			
+			<button type="submit" form="join-form">Join This Class</button>`);
 	//newToken();
 	generateFormInputs();	
 	listenSchedSubmit();	
@@ -155,53 +210,57 @@ function listenJoinBtn() {
 	
 }
 
-//
 let usersSelection;
-//listen class schedule form submit button
+
+//listen form submit button
 function listenSchedSubmit() {
-	$('.class-schedules').submit(function(event) {
+	$('#join-form').submit(function(event) {
 		event.preventDefault();
+
+		//making the input an array so it can be converted into an object to send for the POST method
 		usersSelection = $('input:checked').val().split(',');
 		//newToken();
 
 		postUsersSelection(usersSelection);
-		console.log(usersSelection);
-		
 
+		//refreshReservationList()
+		$('.app-container').find('.reservation-list').empty();
+		getReservationData(generateListItems);
+		listenJoinBtn();
+
+		resetJoinForm();
 	});
 	
 }
 
 function postUsersSelection(usersSelection) {
+
+	//taking the array defined above and making it an object to send in the POST
 	const obj = {
 		"class": usersSelection[0],
 		"time": usersSelection[1],
 		"day": usersSelection[2],
 		"date": usersSelection[3]
-	};
+	}; 
+
 	const settings = {
 		url: "http://localhost:8080/api/join-a-class",
     	method: "POST",
     	data: JSON.stringify(obj),
     	contentType: "application/json",
-    	
-    	
+    	success: alert('You have successfully joined ' + usersSelection[0] + ', at ' + usersSelection[1] + ' on ' + usersSelection[2] + ', ' + usersSelection[3] + '.')  	
 	};
 
 	$.ajax(settings);
-	console.log(obj);
+	//refreshReservationList();
+}
+
+//reset the Join More Classes form after user submits
+function resetJoinForm() {
+	$('.list-container2').empty();
+	generateFormInputs();
 }
 
 
-
-
-
-
-/*
-//append new reservation to list??
-let listItem = `<li>${classSelection}</li>`;
-		$('.list-placeholder').append(listItem);
-		$('.class-schedules').remove();
-*/
 
 $(listenSignIn);
