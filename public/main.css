@@ -1,7 +1,122 @@
+@font-face {
+	font-family: PlaylistScript;
+	src: url(stylesheets/fonts/Playlist-Script.otf);
+}
+@font-face {
+	font-family: Bebas;
+	src: url(stylesheets/fonts/Bebas.ttf);
+}
+
 body {
-	color:blue;
+	color:#1E5D8A;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 20px;
+}
+
+
+.app-container {
+
+	background: white;
+	position: absolute ;
+	left: 10%;
+	padding: 20px;
+	border: 2px solid #1E5D8A;
+	border-radius: 3px;
+}
+
+
+main {
+
+	height: 100vh;
+	width:100vh;
+	/*max-height:900px;
+	max-width:1500px;
+	*/
+	float:right;
+
+	background: 
+    linear-gradient(rgba(255, 255, 255,.87), rgba(255, 255, 255,.60)),
+    url(images/balletclass_stock_photo_crop.jpg);
+    filter: grayscale(1) contrast(1.3);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
 }
+
+/* FIX THIS */
+.loginwarn {
+	font-color: #FE0404 !important;
+	margin:20px;
+}
+
+header {
+	background: #1E5D8A;
+	color:#FFFFFF;
+}
+
+h1 {
+	font-family: PlaylistScript;
+	font-size: 100px;
+	position: relative ;
+	left: 10%;
+}
+
+h2 {
+	font-family: 'Bebas';
+	font-size:40px;
+}
+
+button {
+	border: 1px solid #BABABA;
+	padding: 5px;
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+ul {
+	list-style: none;
+}
+
+li {
+	margin-bottom: 15px;
+	border: 2px solid #1E5D8A;
+	padding: 15px;
+}
+
+.login-form > input {
+	display: block;
+	margin: 5px 0px 15px;
+}
+
+.signup-form > input {
+	display: block;
+	margin: 5px 0px 15px;
+}
+
+.sched-item {
+	display:flex;
+ 	margin-bottom: 15px;
+ 	padding: 8px;
+}
+
+.sched-input {
+	margin-right: 5px;
+}
+
+.sched-item > label:hover, label:focus input:checked + label {
+    border: 2px solid #1E5D8A;
+    padding: 10px;
+}
+
+
+
+.cancel-res {
+	margin-left: 20px;
+}
+
+
 
 .hidden {
 	display: none;

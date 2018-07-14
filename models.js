@@ -8,6 +8,7 @@ const reservationSchema = mongoose.Schema({
 	day: {type: String},
 	date: {type: String},
 	location: {type: String},
+  userId: {type: String}
 });
 
 
@@ -19,7 +20,8 @@ reservationSchema.methods.serialize = function() {
     time: this.time,
     day: this.day,
     date: this.date,
-    location: this.location
+    location: this.location,
+    userId: this.userId
   };
 };
 

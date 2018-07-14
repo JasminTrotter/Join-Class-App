@@ -9,7 +9,6 @@ const passport = require('passport');
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
-
 const { DATABASE_URL, PORT } = require('./config');
 const { Reservations } = require('./models');
 
@@ -38,8 +37,8 @@ app.use(function (req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use('/api/users/', usersRouter);
-app.use('/api/auth/', authRouter);
+app.use('/users/', usersRouter);
+app.use('/auth/', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
@@ -55,13 +54,14 @@ app.post('/api/join-a-class', jwtAuth, (req, res) => {
 
 //    }
 
-        Reservations.create({
-        id: req.body.id,
-        class: req.body.class,
-        time: req.body.time, 
-        day: req.body.day,
-        date: req.body.date,
-        location: req.body.location
+  Reservations.create({
+    id: req.body.id,
+    class: req.body.class,
+    time: req.body.time, 
+    day: req.body.day,
+    date: req.body.date,
+    location: req.body.location,
+    userId: req.body.userId
   })
   .then((post) => {
     res.json(post.serialize())
@@ -70,10 +70,11 @@ app.post('/api/join-a-class', jwtAuth, (req, res) => {
 
 
 //A protected endpoint to view current reservations
-app.get('/api/current-reservations', jwtAuth, (req, res) => {
+app.get('/api/current-reservations/:userId', jwtAuth, (req, res) => {
     Reservations
-    .find()
-    .then(posts => {
+    .find({userId: req.params.userId})
+
+    .then( posts => {
       res.json(posts.map(post => post.serialize()));
     })
     .catch(err => {

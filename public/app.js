@@ -1,124 +1,4 @@
-//listen for when user submits login form and calls login with the credentials entered on the form
-function listenLogin() {
-	$('.login-form').submit(event => {
-		event.preventDefault();
-		let userCreds = {
-      		username: $(".username").val(),
-      		password: $(".password").val()
-    	};
-
-    	login(userCreds);
-  	});
-
-}
-
-//If the user has no account yet, this button will take them to a Sign Up form
-function listenSignupBtn() {
-	$('.signup-button').on('click', event => {
-		$('.signup-container').removeClass('hidden');
-		$('.login-form').addClass('hidden');
-		listenSigninBtn();
-		listenSignupForm();
-	});
-}
-
-//On the Sign Up form page, 
-//there is a button for the user to go back to the log in form 
-//if they aready have an account (page reloads)
-function listenSigninBtn() {
-	$('.signin-button').on('click', event => {
-		location.reload();
-	});
-}
-
-
-//listens for when user submits signup form
-function listenSignupForm() {
-  $(".signup-form").on("submit", event => {
-    event.preventDefault();
-    let password = $(".new-password").val();
-    let username = $(".new-username").val();
-    //if password is too short, show warning
-    
-      let newUserCreds = {
-        firstName: $(".firstname").val(),
-        lastName: $(".lastname").val(),
-        username: username,
-        password: password
-      };
-      createUser(newUserCreds);
-    });
-}
-
-function createUser(newUserCreds) {
-  let userCreds = {
-    firstName: newUserCreds.firstName,
-    lastName: newUserCreds.lastName,
-    username: newUserCreds.username,
-    password: newUserCreds.password
-  };
-  //post new user data
-  $.ajax({
-    url: "http://localhost:8080/api/users",
-    method: "POST",
-    data: JSON.stringify(newUserCreds),
-    crossDomain: true,
-    contentType: "application/json",
-    //on success, call showSuccessBox
-    success: () => {
-      showSuccessBox(userCreds);
-    },
-    //if error, call userDuplicate
-    error: userDuplicate
-  });
-}
-
-//warn that username is already taken
-function userDuplicate() {
-  $(".userwarn").html("Username already taken");
-}
-
-
-//sends POST request to api/auth/login
-function login(userCreds) {
-	console.log(userCreds);
-  $.ajax({
-    url: "http://localhost:8080/api/auth/login",
-    method: "POST",
-    data: JSON.stringify(userCreds),
-    crossDomain: true,
-    contentType: "application/json",
-    success: loginSuccess,
-   	error: loginFailMessage
-  });
-
-}
-
-
-//if login fails, show warning
-function loginFailMessage() {
-  $(".loginwarn").html("Login failed. Please try again.");
-}
-
-
-//if login succeeds, create token and call 
-function loginSuccess(response) {
-	$('.login-form').addClass('hidden');
- 	localStorage.setItem("TOKEN", response.authToken);
- 	newToken();
- 	showReservationList();
-}
-
-//sets up token in header for ajax requests so user can access their account and data
-function newToken() {
-  $.ajaxSetup({
-    dataType: "json",
-    contentType: "application/json",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("TOKEN")
-    }
-  });
-}
+//this file runs the app 
 
 //removes .hidden class so that Current Reservations List is visible
 function showReservationList() {
@@ -131,8 +11,9 @@ function showReservationList() {
 
 //GET the user's current reservations
 function getReservationData(callback) {
+	const userId = localStorage.getItem("userId");
 	$.ajax({
-		url: 'http://localhost:8080/api/current-reservations',
+		url: 'http://localhost:8080/api/current-reservations/' + userId,
     	method: 'GET',
     	dataType: 'json',
     	success: callback
@@ -147,7 +28,7 @@ function getReservationData(callback) {
 //and appending them to the Current Reservations list
 function generateListItems(data) {
 	for (let i=0; i<data.length; i++) {		
-		const listItem = `<li class="list-item">${data[i].class}, ${data[i].time}, ${data[i].day}, ${data[i].date} <button class="cancel-res" id="${data[i].id}">Cancel</button></li>`
+		const listItem = `<li class="list-item">${data[i].class}, ${data[i].time}, ${data[i].day}, ${data[i].date} <button class="cancel-res" id="${data[i].id}">Cancel Reservation</button></li>`
 		$('.reservation-list').append(listItem);
 		console.log(listItem);
 		//listenCancelBtn();
@@ -208,7 +89,7 @@ function listenLogout() {
 //generate form inputs
 function generateFormInputs() {
 	for (let i=0; i<classSchedule.length; i++) {		
-		const input = `<input type="radio" value="${classSchedule[i].class},${classSchedule[i].time},${classSchedule[i].day},${classSchedule[i].date}">${classSchedule[i].class}, ${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}`
+		const input = `<div class="sched-item"><label for="${classSchedule[i].id}" class="sched-label"><input id="${classSchedule[i].id}" class="sched-input" type="radio" name="${classSchedule[i].id}" value="${classSchedule[i].class},${classSchedule[i].time},${classSchedule[i].day},${classSchedule[i].date}">${classSchedule[i].class}, ${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}</label></div>`
 		$('#join-form').append(input);
 		console.log(input);
 	}
@@ -219,9 +100,9 @@ function generateFormInputs() {
 function listenJoinBtn() {
 	$('.join-class').on('click', function(event){
 		$('.list-container2').html(
-			`<h2>Class Schedule</h2>
+			`<h2>Class Schedule</h2><p><em>Select a class from the schedule below and click "Submit" to add it to your reservations.</em></p>
 			<form id="join-form" action="http://localhost:8080/api/join-a-class" method="post"></form>			
-			<button type="submit" form="join-form">Join This Class</button>`);
+			<button type="submit" form="join-form">Submit</button>`);
 	generateFormInputs();	
 	listenSchedSubmit();	
 	});
@@ -259,16 +140,19 @@ function postUsersSelection(usersSelection) {
 		"class": usersSelection[0],
 		"time": usersSelection[1],
 		"day": usersSelection[2],
-		"date": usersSelection[3]
+		"date": usersSelection[3],
+		"userId": localStorage.getItem("userId")
 	}; 
 
 	const settings = {
 		url: "http://localhost:8080/api/join-a-class",
     	method: "POST",
     	data: JSON.stringify(obj),
-    	contentType: "application/json",
-    	//success: alert('You have successfully joined ' + usersSelection[0] + ', at ' + usersSelection[1] + ' on ' + usersSelection[2] + ', ' + usersSelection[3] + '.')  	
-		success: refreshReservationList
+    	contentType: "application/json", 	
+		success: function() {
+			alert('You have successfully joined ' + usersSelection[0] + ', at ' + usersSelection[1] + ' on ' + usersSelection[2] + ', ' + usersSelection[3] + '.');
+			refreshReservationList;
+		}
 	};
 
 	$.ajax(settings);
@@ -282,10 +166,4 @@ function resetJoinForm() {
 }
 
 
-function handleApp() {
-	listenLogin();
-	listenSignupBtn();
-	listenLogout();
-}
 
-$(handleApp);

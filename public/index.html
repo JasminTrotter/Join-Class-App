@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title></title>
+		<title>Join Class</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="main.css" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	</head>
 	<body>
 		<header role="header">
 			<h1>Join Class</h1>
 		</header>
 		<main role="main">
-			<button class="logout-button hidden">Log Out</button>
+			<section class="primary-content">
+				<button class="logout-button hidden">Log Out</button>
 
-			<div class="app-container">
-				<div class="list-container hidden">
-					<h2>Current Reservations</h2>
-					<ul class="reservation-list">
-						
-					</ul>
-					<button class="join-class">Join More Classes</button>
-				</div>
+				<div class="app-container">
+					<div class="secondary-content">
+					<div class="list-container hidden">
+						<h2>Current Reservations</h2>
+						<ul class="reservation-list"></ul>
+						<button class="join-class">Join More Classes</button>
+					</div>
 				
-				<div class="list-container2"></div>
+					<div class="list-container2"></div>
 
-				<div class="login-container">
-					<form class="login-form">
-						<div class="loginwarn"></div>
-						Email
-						<input class="username" type="text" name="email">
-						Password
-						<input class="password" type="text" name="password">
-						<button type="submit">Log in</button>
-						<p>Don't have an account? <button type="button" class="signup-button">Sign Up!</button></p>
-					</form>
-				</div>
+					<div class="login-container">
+						<form class="login-form">
+							<h2>Sign In</h2>
+							<div class="loginwarn"></div>
+							<label for="email">Email</label>
+							<input class="username" type="text" name="email">
+							<label for="password">Password</label>
+							<input class="password" type="text" name="password">
+							<button type="submit">Log in</button>
+							<p>Don't have an account? <button type="button" class="signup-button">Sign Up!</button></p>
+						</form>
+					</div>
 				
-				<div class="signup-container hidden">
-					<form class="signup-form">
-						First Name
-						<input class="firstname" type="text" name="first-name">
-						Last Name
-						<input class="lastname" type="text" name="last-name">
-						Email
-						<input class="new-username" type="text" name="email">
-						Password
-						<input class="new-password" type="text" name="password">
-						<button type="submit">Submit</button>
-						<p>Already have an account? <button class="signin-button">Sign In</button></p>
-					</form>
+					<div class="signup-container hidden">
+						<h2>Sign Up</h2>
+						<form class="signup-form">
+							<label for="first-name">First Name</label>
+							<input class="firstname" type="text" name="first-name">
+							<label for="last-name">Last Name</label>
+							<input class="lastname" type="text" name="last-name">
+							<label for="email">Email</label>
+							<input class="new-username" type="text" name="email">
+							<label for="password">Password</label>
+							<input class="new-password" type="text" name="password">
+							<button type="submit">Submit</button>
+							<p>Already have an account? <button type="button" class="signin-button">Sign In</button></p>
+						</form>
+					</div>
 				</div>
+
 			</div>
-			
-
+			</section>
+			<!--<div class="secondary-content">.</div>-->
 		</main>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="login.js"></script>
 	<script src="app.js"></script>
 	<script src="store.js"></script>
+
 	</body>
 </html>
