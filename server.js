@@ -61,6 +61,8 @@ app.post('/api/join-a-class', jwtAuth, (req, res) => {
     day: req.body.day,
     date: req.body.date,
     location: req.body.location,
+    description: req.body.description,
+    length: req.body.length,
     userId: req.body.userId
   })
   .then((post) => {
@@ -82,6 +84,9 @@ app.get('/api/current-reservations/:userId', jwtAuth, (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
+
+
+
 
 app.delete('/api/current-reservations/:id', jwtAuth, (req, res) => {
   Reservations.findByIdAndRemove(req.params.id)
