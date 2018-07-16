@@ -18,7 +18,7 @@ function listenLogin() {
 function listenSignupBtn() {
 	$('.signup-button').on('click', event => {
 		$('.signup-container').removeClass('hidden');
-		$('.login-form').addClass('hidden');
+		$('.login-container').addClass('hidden');
 		listenSigninBtn();
 		listenSignupForm();
 	});
@@ -38,6 +38,7 @@ function listenSigninBtn() {
 function listenSignupForm() {
   $(".signup-form").on("submit", event => {
     event.preventDefault();
+    
     let password = $(".new-password").val();
     let username = $(".new-username").val();
     //if password is too short, show warning
@@ -105,12 +106,22 @@ function loginFailMessage() {
 
 //if login succeeds, create token and call 
 function loginSuccess(response) {
-	$('.login-form').addClass('hidden');
+	$('.login-container').remove();
  	localStorage.setItem("TOKEN", response.authToken);
   localStorage.setItem("userId", response.userId);
  	newToken();
  	showReservationList();
+  $('.logout-button').removeClass('hidden');
 }
+
+//listen for when user clicks "Log Out", removes JWT token from local storage, and reloads the page
+function listenLogout() {
+  $(".logout-button").on("click", event => {
+    localStorage.removeItem("TOKEN");
+    location.reload();
+  });
+}
+
 
 //sets up token in header for ajax requests so user can access their account and data
 function newToken() {

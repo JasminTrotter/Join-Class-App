@@ -2,8 +2,8 @@
 
 //removes .hidden class so that Current Reservations List is visible
 function showReservationList() {
-	$('.list-container').removeClass("hidden");
-	$('.signin').addClass("hidden");
+	$('.list-container').removeClass('hidden').addClass('border');
+	$('.signin').addClass('hidden');
 	getReservationData(generateListItems);
 	listenJoinBtn();
 }
@@ -90,9 +90,10 @@ function renderDeets(data) {
 	//find that item with that id within the array of data 
 	const winner = data.find(isItem);
 
-	$('.deets-container').html(`<aside><button type="button" class="close-deets"> X Close</button><ul><h3>Details</h3>
-		<li><b>Description:</b><br> ${winner.description}</li>
-		<li><b>Duration:</b><br> ${winner.length}</li>
+	$('deets-container').removeClass('hidden');
+	$('.deets-container').html(`<aside><button type="button" class="close-deets"> X Close</button><ul><h2>Details</h2>
+		<li><h3>Description:</h3> ${winner.description}</li>
+		<li><h3>Duration:</h3> ${winner.length}</li>
 		</ul></aside>`);
 
 	listenCloseDeets();
@@ -101,22 +102,8 @@ function renderDeets(data) {
 function listenCloseDeets() {
 	$('.close-deets').on('click', event => {
 		$('.deets-container').empty();
+		//$('aside').removeClass('deets').addClass('hidden');
 	});
-}
-
-
-//checks if JWT token is already in local storage
-//function isLoggedIn() {
-//  return localStorage.getItem("TOKEN");
-//}
-
-
-//listen for when user clicks "Log Out", removes JWT token from local storage, and reloads the page
-function listenLogout() {
-  $(".logout-button").on("click", event => {
-    localStorage.removeItem("TOKEN");
-    location.reload();
-  });
 }
 
 
@@ -126,11 +113,11 @@ function generateFormInputs() {
 
 		//I am putting `${classSchedule[i].description}%${classSchedule[i].length} on button ID's 
 		//so that I can use that to return data for the Class Details button
-		const input = `<div class="sched-item">	
-			<input id="${i}" class="sched-input" type="radio" name="${classSchedule[i].id}" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}">
-			<label for="${i}" class="sched-label">${classSchedule[i].class}, ${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}
+		const input = `<span class="sched-item">	
+			
+			<label for="a${i}" class="sched-label"><input id="a${i}" class="sched-input" type="radio" name="${classSchedule[i].id}" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}">${classSchedule[i].class}, ${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}
 			</label>
-			<button type="button" class="view-deets-2" id="${classSchedule[i].description}%${classSchedule[i].length}">View Details</button></div>`
+			<button type="button" class="view-deets-2" id="${classSchedule[i].description}%${classSchedule[i].length}">View Details</button></span>`
 		$('#join-form').append(input);
 	}
 
@@ -141,6 +128,7 @@ function generateFormInputs() {
 //sends a POST request of the selected class
 function listenJoinBtn() {
 	$('.join-class').on('click', function(event){
+		$('.list-container2').removeClass('hidden').addClass('border');
 		$('.list-container2').html(
 			`<h2>Class Schedule</h2><p><em>Select a class from the schedule below and click "Submit" to add it to your reservations.</em></p>
 			<form id="join-form" action="http://localhost:8080/api/join-a-class" method="post"></form>			
@@ -218,6 +206,7 @@ function postUsersSelection(usersSelection) {
 //reset the Join More Classes form after user submits
 function resetJoinForm() {
 	$('.list-container2').empty();
+	$('.list-container2').removeClass('border').addClass('hidden');
 	generateFormInputs();
 }
 

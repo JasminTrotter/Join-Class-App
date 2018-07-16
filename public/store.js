@@ -20,17 +20,7 @@ var firstDayOfBalletDeets = {
 
 
 var classSchedule = [
-		{
-			class: "Barre and Center",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 15",
-			location: "Moonstar Dance Studio",
-			description: barreAndCenterDeets.description,
-			length: barreAndCenterDeets.length,
-			formInputId: barreAndCenterDeets.formInputId
-
-		},
+		
 		{
 			class: "Barre and Center",
 			time: "3pm",
@@ -62,25 +52,15 @@ var classSchedule = [
 			formInputId: firstDayOfBalletDeets.formInputId
 		},
 		{
-			class: "A",
-			time: "A",
-			day: "A",
-			date: "A",
-			location: "A"
-		},
-		{
-			class: "B",
-			time: "B",
-			day: "B",
-			date: "B",
-			location: "B"
-		},
-		{
-			class: "C",
-			time: "C",
-			day: "C",
-			date: "C",
-			location: "C"
+			class: "Barre and Center",
+			time: "3pm",
+			day: "Sunday",
+			date: "August 12",
+			location: "Moonstar Dance Studio",
+			description: barreAndCenterDeets.description,
+			length: barreAndCenterDeets.length,
+			formInputId: barreAndCenterDeets.formInputId
+
 		}
 	];
 
