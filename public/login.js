@@ -85,7 +85,7 @@ function createUser(newUserCreds) {
   };
   //post new user data
   $.ajax({
-    url: "http://localhost:8080/users",
+    url: "/users",
     method: "POST",
     data: JSON.stringify(newUserCreds),
     crossDomain: true,
@@ -133,7 +133,7 @@ function listenFirstLogin(newUserCreds) {
 function login(userCreds) {
 	console.log(userCreds);
   $.ajax({
-    url: "http://localhost:8080/auth/login",
+    url: "/auth/login",
     method: "POST",
     data: JSON.stringify(userCreds),
     crossDomain: true,
