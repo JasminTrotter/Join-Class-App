@@ -26,7 +26,7 @@ function getReservationData(callback) {
 //and appending them to the Current Reservations list
 function generateListItems(data) {
 	for (let i=0; i<data.length; i++) {		
-		const listItem = `<li class="list-item">${data[i].class}, ${data[i].time}, ${data[i].day}, ${data[i].date} <button type="button" class="view-deets" id="${data[i].id}">View Details</button><button class="cancel-res" id="${data[i].id}">Cancel Reservation</button></li>`
+		const listItem = `<li class="list-item"><span><b>${data[i].class}</b><br>${data[i].time}, ${data[i].day}, ${data[i].date} </span><button type="button" class="view-deets" id="${data[i].id}">View Details</button><button class="cancel-res" id="${data[i].id}">Cancel Reservation</button></li>`
 		$('.reservation-list').append(listItem);
 	}
 	listenCancelBtn();
@@ -91,7 +91,8 @@ function renderDeets(data) {
 	const winner = data.find(isItem);
 
 	$('deets-container').removeClass('hidden');
-	$('.deets-container').html(`<aside><button type="button" class="close-deets"> X Close</button><ul><h2>Details</h2>
+	$('.deets-container').html(`<aside><button type="button" class="close-deets close"> X Close</button><ul><h2>Details</h2>
+		<li><h3>Class:</h3> ${winner.class}</li>
 		<li><h3>Description:</h3> ${winner.description}</li>
 		<li><h3>Duration:</h3> ${winner.length}</li>
 		</ul></aside>`);
@@ -113,30 +114,47 @@ function generateFormInputs() {
 
 		//I am putting `${classSchedule[i].description}%${classSchedule[i].length} on button ID's 
 		//so that I can use that to return data for the Class Details button
-		const input = `<span class="sched-item">	
+		const input = `<div class="sched-item">	
 			
-			<label for="a${i}" class="sched-label"><input id="a${i}" class="sched-input" type="radio" name="${classSchedule[i].id}" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}">${classSchedule[i].class}, ${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}
+			<label for="a${i}" class="sched-label"><input id="a${i}" class="sched-input" type="radio" name="${classSchedule[i].id}" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}"><span><b>${classSchedule[i].class}</b><br>${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}</span>
 			</label>
-			<button type="button" class="view-deets-2" id="${classSchedule[i].description}%${classSchedule[i].length}">View Details</button></span>`
+			<button type="button" class="view-deets-2" id="${classSchedule[i].class}%${classSchedule[i].description}%${classSchedule[i].length}">View Details</button></div>`
 		$('#join-form').append(input);
 	}
-
+	labelListener();
 	listenDetailsBtnFromSched();
+}
+
+function labelListener() {
+	$('.sched-label').on('click', function(event) {
+		$('.sched-label').removeClass('active');
+		$(this).addClass('active');
+	});
+
 }
 
 //listen for click on `join more classes` button 
 //sends a POST request of the selected class
 function listenJoinBtn() {
 	$('.join-class').on('click', function(event){
+		$('.join-class').addClass('hidden');
 		$('.list-container2').removeClass('hidden').addClass('border');
 		$('.list-container2').html(
-			`<h2>Class Schedule</h2><p><em>Select a class from the schedule below and click "Submit" to add it to your reservations.</em></p>
+			`<button type="button" class="close close-sched"> X Close</button><h2>Class Schedule</h2><p><h3><em>Select a class from the schedule below and click "Submit" to add it to your reservations.</em></h3></p>
 			<form id="join-form" action="http://localhost:8080/api/join-a-class" method="post"></form>			
 			<button type="submit" form="join-form">Submit</button>`);
 		generateFormInputs();	
 		listenSchedSubmit();
+		listenCloseSched();
 		$('.deets-container').empty();	
 	});	
+}
+
+function listenCloseSched() {
+	$('.close-sched').on('click', event => {
+		$('.list-container2').addClass('hidden').removeClass('border');
+		$('.join-class').removeClass('hidden');
+	});
 }
 
 function listenDetailsBtnFromSched() {
@@ -146,9 +164,10 @@ function listenDetailsBtnFromSched() {
 		 deetsWanted = event.currentTarget.id;
 		 theDeets = deetsWanted.split('%');
 
-	$('.deets-container').html(`<aside><button type="button" class="close-deets"> X Close</button><ul><h3>Details</h3>
-		<li><b>Description:</b><br> ${theDeets[0]}</li>
-		<li><b>Duration:</b><br> ${theDeets[1]}</li>
+	$('.deets-container').html(`<aside><button type="button" class="close close-deets"> X Close</button><ul><h2>Details</h2>
+		<li><h3>Class:</h3>${theDeets[0]}</li>
+		<li><h3>Description:</h3>${theDeets[1]}</li>
+		<li><h3>Duration:</h3>${theDeets[2]}</li>
 		</ul></aside>`);
 
 	listenCloseDeets();
@@ -196,6 +215,7 @@ function postUsersSelection(usersSelection) {
 		success: function() {			
 			alert('You have successfully joined ' + usersSelection[0] + ', at ' + usersSelection[1] + ' on ' + usersSelection[2] + ', ' + usersSelection[3] + '.');
 			refreshReservationList();
+			$('.join-class').removeClass('hidden');
 		}
 	};
 

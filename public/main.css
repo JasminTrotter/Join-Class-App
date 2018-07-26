@@ -7,7 +7,7 @@
 	src: url(stylesheets/fonts/Bebas.ttf);
 }
 
-.loginwarn {
+.loginwarn, .passwarn, .userwarn {
 	color: #B30000;
 	margin:20px;
 }
@@ -25,12 +25,14 @@ body {
 	color:#4A4A4A;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 20px;
-	width: 100vw;
+	/*width: 100vw;
+	height: 100vh;*/
 }
 
 header {
 	background: #1E5D8A;
 	color:#FFFFFF;
+	margin-top: 40px;
 	position: fixed;
 	width: 100%;
 	max-height: 150px;
@@ -40,8 +42,10 @@ header {
 .logout-button {
 	position: absolute;
 	right: 10%;
-	top: 10%;
+	background-color: #0E2B40;
+	top: 50%;
 }
+
 
 h1 {
 	font-family: PlaylistScript;
@@ -52,20 +56,22 @@ h1 {
 }
 
 main {
-	height: 2000px;
+	height: 100vh;
 	width: 100vw;
+
 }
 
 
 .BG {
 	position: fixed;
-
-	height: 1300px;
+	/*height: 1300px;*/
+	height: 100vh;
 	width:100%;
 	background-image: url(images/balletclass_stock_photo_crop_edit.jpg);
     background-position: right bottom;
     background-repeat: no-repeat;
-    background-size: 1500px;
+    /*background-size: 1500px;*/
+    background-size: 90vh;
 
 }
 
@@ -80,10 +86,13 @@ main {
 
 .login-container {
 	position: fixed;
+	overflow: scroll;
 	background: white;
 	top:25%;
-	width: 20%;
-	min-width: 300px;
+	width: 30%;
+	height: 60%;
+	max-height: 500px;
+	min-width: 270px;
 	left: 10%;
 	padding: 20px;
 	border: 2px solid #4A4A4A;
@@ -96,8 +105,11 @@ main {
 	display: grid;
 	grid-template-columns: 50% 50%;
 	position: absolute;
-	top: 15%;
+	top: 25%;
 	left:10%;
+	margin-right: 20px;
+	overflow: scroll;
+	margin-bottom: 100px;
 }
 
 .border {
@@ -107,8 +119,6 @@ main {
 	border: 2px solid #4A4A4A;
 	border-radius: 3px;
 }
-
-
 
 
 
@@ -123,13 +133,13 @@ main {
 
 .signup-container {
 	position: absolute;
-	top: 15%;
+	top: 25%;
 	background: white;
 	left: 10%;
 	padding: 20px;
 	border: 2px solid #4A4A4A;
 	border-radius: 3px;
-	width: 500px;
+	width: 30%;
 
 }
 
@@ -141,13 +151,15 @@ aside {
 	border: 2px solid #1E5D8A;
 	border-radius: 3px;
 	z-index: 9999;
+	margin-top: 100px;
 }
 
 .deets-container {
 	display: flex;
-	float:right;
+	
 	width: 50%;
-	margin-right: 300px;
+
+	margin: auto;
 	z-index: 9999;
 }
 
@@ -157,6 +169,11 @@ h2 {
 	font-size:40px;
 }
 
+button:hover {
+	color: black;
+	background-color: #37ACFF;
+}
+
 button {
 	background-color: #1E5D8A;
 	color: white;
@@ -164,16 +181,17 @@ button {
 	padding: 5px;
 	border-radius: 3px;
 	font-family: 'Montserrat', sans-serif;
-	font-size: 20px;
+	font-size: 15px;
 }
 
-button:hover {
-	color: white;
-	background-color: #1E5D8A;
+button[type="submit"], .join-class {
+	margin-top: 40px;
+	padding: 10px;
 }
 
 ul {
-	list-style: none;
+	list-style-type: none;
+
 }
 
 li {
@@ -182,6 +200,7 @@ li {
 	margin-bottom: 15px;
 	border: 2px solid #1E5D8A;
 	padding: 15px;
+	margin-left: -40px;
 }
 
 .login-form > input {
@@ -189,30 +208,164 @@ li {
 	margin: 5px 0px 15px;
 }
 
-.signup-form > input {
+p {
+	margin-top: 80px;
+}
+
+input[type="radio"] {
+	visibility: hidden ;
+}
+
+.sign > input {
 	display: block;
-	margin: 5px 0px 15px;
+	margin: 5px 0px 25px;
+	width: 70%;
+	height: 20px;
 }
 
 .sched-item {
 	display:flex;
  	margin-bottom: 15px;
  	padding: 8px;
+ 	display: grid;
+ 	grid-template-columns: 65% 35%;
 }
 
 .sched-input {
 	margin-right: 5px;
 }
 
-.sched-item > label:hover, label:focus, input[checked] + label {
+.sched-item > label:hover, .sched-label.active, label:focus, input[checked] + label {
     border: 2px solid #1E5D8A;
     padding: 10px;
+}
+
+.join-class, .close {
+	float: right;
+	background-color: #CCCC18;
+	color: black;
+	padding: 10px;
 }
 
 
 
 .cancel-res {
 	margin-left: 20px;
+}
+
+@media all and (max-width: 1690px) {
+	header {
+		margin-top: 15px;
+	}
+	.BG {
+		background-size: 90vh;
+	}
+
+	p {
+		margin-top: 40px;
+	}
+
+	.app-container {
+		height: 80vh;
+		top: 0%;
+	}
+	header {
+		max-height: 110px;
+	}
+	h1 {
+		font-size: 80px;
+		top: -55px;
+	}
+	h2 {
+		font-size: 40px;
+	}
+	li, label {
+		font-size: 15px;
+	}
+	.list-item {
+		grid-template-columns: 40% 25% 35%;
+	}
+
+
+}
+
+@media all and (max-width: 1280px) {
+	.list-item {
+		grid-template-columns: 45% 25% 30%;
+	}
+}
+
+
+
+@media all and (max-width: 1176px) {
+	h2 {
+		font-size: 35px;
+	}
+	.app-container {
+		width: 90vw;
+	}
+	.panels-container {
+		width: 90%;
+		left: 5%;
+	}
+	.login-form > input {
+	margin: 5px 0px 5px;
+	}
+	.cancel-res {
+		font-size: 12px;
+	}
+	.sched-item {
+		grid-template-columns: 75% 25%;
+	}
+}
+
+@media all and (max-width: 1028px) {
+	h2 {
+		font-size: 30px;
+	}
+	h3 {
+		font-size: 18px;
+	}
+	.list-container, .list-container2, .signup-container {
+		width: 90%;
+	}
+	.panels-container {
+		display: block;
+	}
+}
+
+@media all and (max-width: 786px) {
+	.list-item {
+		grid-template-columns: 100% ;
+	}
+	.cancel-res, .view-deets {
+		margin: 0px;
+		width: 100%;
+	}
+	.view-deets {
+
+		margin-right: 15px;
+	}
+
+
+}
+
+@media all and (max-width: 480px) {
+	.view-deets {
+		margin-left: 10px;
+	}
+	.logout-button {
+		top: 100px;
+	}
+}
+
+@media all and (max-width: 360px) {
+	h1 {
+		font-size: 60px;
+		top: -28px;
+	}
+
+
 }
 
 

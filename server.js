@@ -95,9 +95,7 @@ app.delete('/api/current-reservations/:id', jwtAuth, (req, res) => {
 
 
 
-app.use('*', function (req, res) {
-  res.status(404).json({ message: 'Not Found' });
-});
+
 
 
 // closeServer needs access to a server object, but that only

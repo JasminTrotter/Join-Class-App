@@ -1,4 +1,5 @@
-var barreAndCenterDeets = { 
+var barreAndCenterDeets = {
+		class: "Barre and Center for Beginners",
 		description: "Barre and Center for Beginners is " +
 						"for students who have taken the First Day of Ballet class one " + 
 						"or more times, or have taken ballet in the past and are familiar with " + 
@@ -10,6 +11,7 @@ var barreAndCenterDeets = {
 };
 
 var firstDayOfBalletDeets = {
+		class: "First Day of Ballet",
 		description: "First Day of Ballet is designed for students who have never taken a ballet class ever. " + 
 						"It is an intro/assessment class and we will be determining after this class whether " + 
 						"you are ready to move on to Barre and Center for Beginners or if (in rare cases) need to repeat First Day of Ballet.",
@@ -20,19 +22,8 @@ var firstDayOfBalletDeets = {
 
 
 var classSchedule = [
-		
 		{
-			class: "Barre and Center",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 22",
-			location: "Moonstar Dance Studio",
-			description: barreAndCenterDeets.description,
-			length: barreAndCenterDeets.length,
-			formInputId: barreAndCenterDeets.formInputId
-		},
-		{
-			class: "Barre and Center",
+			class: "Barre and Center for Beginners",
 			time: "3pm",
 			day: "Sunday",
 			date: "July 29",
@@ -52,7 +43,7 @@ var classSchedule = [
 			formInputId: firstDayOfBalletDeets.formInputId
 		},
 		{
-			class: "Barre and Center",
+			class: "Barre and Center for Beginners",
 			time: "3pm",
 			day: "Sunday",
 			date: "August 12",
@@ -61,7 +52,37 @@ var classSchedule = [
 			length: barreAndCenterDeets.length,
 			formInputId: barreAndCenterDeets.formInputId
 
-		}
+		},
+		{
+			class: "Barre and Center for Beginners",
+			time: "3pm",
+			day: "Sunday",
+			date: "August 19",
+			location: "Moonstar Dance Studio",
+			description: barreAndCenterDeets.description,
+			length: barreAndCenterDeets.length,
+			formInputId: barreAndCenterDeets.formInputId
+		},
+		{
+			class: "Barre and Center for Beginners",
+			time: "3pm",
+			day: "Sunday",
+			date: "August 26",
+			location: "Moonstar Dance Studio",
+			description: barreAndCenterDeets.description,
+			length: barreAndCenterDeets.length,
+			formInputId: barreAndCenterDeets.formInputId
+		},
+		{
+			class: "First Day of Ballet",
+			time: "3pm",
+			day: "Sunday",
+			date: "September 2",
+			location: "Moonstar Dance Studio",
+			description: firstDayOfBalletDeets.description,
+			length: firstDayOfBalletDeets.length,
+			formInputId: firstDayOfBalletDeets.formInputId
+		},
 	];
 
 

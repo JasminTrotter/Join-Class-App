@@ -38,20 +38,43 @@ function listenSigninBtn() {
 function listenSignupForm() {
   $(".signup-form").on("submit", event => {
     event.preventDefault();
-    
+    $(".passwarn").empty();
+    $(".userwarn").empty();
+
+
     let password = $(".new-password").val();
+    let password2 = $(".new-password2").val();
     let username = $(".new-username").val();
+
     //if password is too short, show warning
-    
+    if (password.length < 10) {
+      $(".passwarn").html("Password must be at least 10 characters");
+    } else if (hasWhiteSpace(username) === true) {
+      $(".userwarn").html("Username cannot contain spaces");
+      //if password or username has white space, show warning
+    } else if (hasWhiteSpace(password) === true) {
+      $(".passwarn").html("Password cannot contain spaces");
+    }
+    else if(password !== password2) {
+      $(".passwarn").html("Passwords don't match!");
+    }
+    else {
       let newUserCreds = {
         firstName: $(".firstname").val(),
         lastName: $(".lastname").val(),
         username: username,
         password: password
-      };
+        };
       createUser(newUserCreds);
+      }
     });
 }
+
+//checks if string has white space
+function hasWhiteSpace(string) {
+  return string.indexOf(" ") >= 0;
+}
+
 
 function createUser(newUserCreds) {
   let userCreds = {
@@ -67,19 +90,43 @@ function createUser(newUserCreds) {
     data: JSON.stringify(newUserCreds),
     crossDomain: true,
     contentType: "application/json",
-    //on success, call showSuccessBox
     success: () => {
-      showSuccessBox(userCreds);
+      greetNewUser(userCreds);
     },
-    //if error, call userDuplicate
+    //FIX
     error: userDuplicate
   });
 }
 
 //warn that username is already taken
 function userDuplicate() {
-  $(".userwarn").html("Username already taken");
+  $('.userwarn').html('Username already taken');
 }
+
+
+//show welcome message with user's firstname
+function greetNewUser(userCreds) {
+  let userGreeting = userCreds.firstName;
+  $('.signup-form').remove();
+  $('.new-user-text').html(userGreeting);
+  $('.greeting-box').removeClass('hidden').addClass('border');
+  listenFirstLogin(userCreds);
+
+}
+
+//listen for when new user logs in from success box
+function listenFirstLogin(newUserCreds) {
+  let userCreds = {
+    username: newUserCreds.username,
+    password: newUserCreds.password
+  };
+  $('.new-signin').on("click", event => {
+    event.preventDefault();
+    //call login, passing user's password and username credentials
+    login(userCreds);
+  });
+}
+
 
 
 //sends POST request to api/auth/login
@@ -100,7 +147,7 @@ function login(userCreds) {
 
 //if login fails, show warning
 function loginFailMessage() {
-  $(".loginwarn").html("Login failed. Please try again.");
+  $(".loginwarn").html("Incorrect username or password.");
 }
 
 
