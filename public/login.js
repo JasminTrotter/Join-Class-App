@@ -124,6 +124,7 @@ function listenFirstLogin(newUserCreds) {
     event.preventDefault();
     //call login, passing user's password and username credentials
     login(userCreds);
+    $('.signup-container').remove();
   });
 }
 
