@@ -32,7 +32,7 @@ body {
 header {
 	background: #1E5D8A;
 	color:#FFFFFF;
-	margin-top: 40px;
+	/*margin-top: 40px;*/
 	position: fixed;
 	width: 100%;
 	max-height: 150px;
@@ -255,7 +255,7 @@ input[type="radio"] {
 
 @media all and (max-width: 1690px) {
 	header {
-		margin-top: 15px;
+		/*margin-top: 15px;*/
 	}
 	.BG {
 		background-size: 90vh;
@@ -326,9 +326,7 @@ input[type="radio"] {
 	h3 {
 		font-size: 18px;
 	}
-	.list-container, .list-container2, .signup-container {
-		width: 90%;
-	}
+	
 	.panels-container {
 		display: block;
 	}
@@ -338,24 +336,23 @@ input[type="radio"] {
 	.list-item {
 		grid-template-columns: 100% ;
 	}
-	.cancel-res, .view-deets {
+	.cancel-res {
 		margin: 0px;
 		width: 100%;
 	}
 	.view-deets {
-
-		margin-right: 15px;
+		width: 100%;
+		margin: 15px 15px 15px 0px;
 	}
 
 
 }
 
 @media all and (max-width: 480px) {
-	.view-deets {
-		margin-left: 10px;
-	}
+
 	.logout-button {
-		top: 100px;
+		top: 60px;
+		right: 5%;
 	}
 }
 
