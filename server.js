@@ -34,11 +34,17 @@ app.use(function (req, res, next) {
   next();
 });
 
+
+
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 app.use('/users/', usersRouter);
 app.use('/auth/', authRouter);
+
+console.log(__dirname);
+app.use(express.static(__dirname + '/public'));
+
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
