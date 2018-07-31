@@ -108,16 +108,20 @@ function listenCloseDeets() {
 }
 
 
-//generate form inputs
+//generate form inputs for user to add a reservation from the form
 function generateFormInputs() {
 	for (let i=0; i<classSchedule.length; i++) {
 
 		//I am putting `${classSchedule[i].description}%${classSchedule[i].length} on button ID's 
 		//so that I can use that to return data for the Class Details button
 		const input = `<div class="sched-item">	
-			
-			<label for="a${i}" class="sched-label"><input id="a${i}" class="sched-input" type="radio" name="${classSchedule[i].id}" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}"><span><b>${classSchedule[i].class}</b><br>${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}</span>
+
+			<label for="a${i}" class="sched-label">
+			<span><b>${classSchedule[i].class}</b><br>${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}</span>
+			<span class="sched-input"><input id="a${i}" type="radio" name="${classSchedule[i].id}" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}"><span class="select">Select</span></input></span>
+
 			</label>
+
 			<button type="button" class="view-deets-2" id="${classSchedule[i].class}%${classSchedule[i].description}%${classSchedule[i].length}">View Details</button></div>`
 		$('#join-form').append(input);
 	}
@@ -140,7 +144,7 @@ function listenJoinBtn() {
 		$('.join-class').addClass('hidden');
 		$('.list-container2').removeClass('hidden').addClass('border');
 		$('.list-container2').html(
-			`<button type="button" class="close close-sched"> X Close</button><h2>Class Schedule</h2><p><h3><em>Select a class from the schedule below and click "Submit" to add it to your reservations.</em></h3></p>
+			`<button type="button" class="close close-sched"> X Close</button><h2>Class Schedule</h2><p class="info"><em>Select a class from the schedule below <br>Then click "Submit" to add it to your reservations.</em></p>
 			<form id="join-form" action="/api/join-a-class" method="post"></form>			
 			<button type="submit" form="join-form">Submit</button>`);
 		generateFormInputs();	

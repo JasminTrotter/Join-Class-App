@@ -22,16 +22,7 @@ var firstDayOfBalletDeets = {
 
 
 var classSchedule = [
-		{
-			class: "Barre and Center for Beginners",
-			time: "3pm",
-			day: "Sunday",
-			date: "July 29",
-			location: "Moonstar Dance Studio",
-			description: barreAndCenterDeets.description,
-			length: barreAndCenterDeets.length,
-			formInputId: barreAndCenterDeets.formInputId
-		},
+
 		{
 			class: "First Day of Ballet",
 			time: "3pm",

@@ -105,7 +105,7 @@ main {
 	display: grid;
 	grid-template-columns: 50% 50%;
 	position: absolute;
-	top: 25%;
+	top: 15%;
 	left:10%;
 	margin-right: 20px;
 	overflow: scroll;
@@ -169,12 +169,8 @@ h2 {
 	font-size:40px;
 }
 
-button:hover {
-	color: black;
-	background-color: #37ACFF;
-}
 
-button {
+button, .select {
 	background-color: #1E5D8A;
 	color: white;
 	border: 1px solid #BABABA;
@@ -183,6 +179,21 @@ button {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 15px;
 }
+
+.view-deets, .view-deets-2 {
+	color: #1E5D8A;
+	background-color: white;
+}
+
+.view-deets-2 {
+	margin-left: 10px;
+}
+
+button:hover, .select:hover {
+	color: black;
+	background-color: #37ACFF;
+}
+
 
 button[type="submit"], .join-class {
 	margin-top: 40px;
@@ -209,11 +220,40 @@ li {
 }
 
 p {
-	margin-top: 80px;
+	margin-top: 50px;
+}
+
+
+
+.sched-label {
+	display: grid;
+	grid-template-columns: 65% 35%;
 }
 
 input[type="radio"] {
-	visibility: hidden ;
+	visibility: hidden;
+
+}
+
+.sched-input {
+	display: flex;
+	float: right;
+}
+
+.select {
+	width: 100%;
+	padding: 20px 0;
+	text-align: center;
+
+}
+
+
+.info {
+	margin-top: 20px;
+	font-size: 15px;
+    padding: 10px;
+    color:#1A527A;
+	background: #EDEDED;
 }
 
 .sign > input {
@@ -224,20 +264,19 @@ input[type="radio"] {
 }
 
 .sched-item {
-	display:flex;
+
  	margin-bottom: 15px;
  	padding: 8px;
  	display: grid;
- 	grid-template-columns: 65% 35%;
+ 	grid-template-columns: 80% 20%;
 }
 
-.sched-input {
-	margin-right: 5px;
-}
 
 .sched-item > label:hover, .sched-label.active, label:focus, input[checked] + label {
     border: 2px solid #1E5D8A;
     padding: 10px;
+    color:#1A527A;
+	background: #EDEDED;
 }
 
 .join-class, .close {
@@ -254,9 +293,6 @@ input[type="radio"] {
 }
 
 @media all and (max-width: 1690px) {
-	header {
-		/*margin-top: 15px;*/
-	}
 	.BG {
 		background-size: 90vh;
 	}
@@ -302,7 +338,7 @@ input[type="radio"] {
 		font-size: 35px;
 	}
 	.app-container {
-		width: 90vw;
+		width: 95vw;
 	}
 	.panels-container {
 		width: 90%;
@@ -333,37 +369,55 @@ input[type="radio"] {
 }
 
 @media all and (max-width: 786px) {
-	.list-item {
-		grid-template-columns: 100% ;
-	}
-	.cancel-res {
-		margin: 0px;
-		width: 100%;
-	}
-	.view-deets {
-		width: 100%;
-		margin: 15px 15px 15px 0px;
-	}
 
+	.panels-container {
+		left: 0%;
+		width: 100%;
+		margin-left: 5px;
 
+	}
+	.signup-container {
+		width: 60%;
+	}
 }
 
 @media all and (max-width: 480px) {
-
-	.logout-button {
-		top: 60px;
-		right: 5%;
-	}
-}
-
-@media all and (max-width: 360px) {
 	h1 {
 		font-size: 60px;
 		top: -28px;
 	}
+	.list-item {
+		grid-template-columns: 100% ;
+	}
+	.logout-button {
+		top: 60px;
+		right: 5%;
+	}
+	.cancel-res {
+		margin-left: 0px;
+		margin-top: 10px;
+	}
+	.view-deets {
+		margin-top: 10px;
+	}
+}
 
+@media all and (max-width: 375px) {
+
+	h2 {
+		font-size: 20px;
+	}
+	.panels-container {
+		top: 25%;
+	}
+	.logout-button {
+		font-size: 10px;
+		top: 70px;
+	}
 
 }
+
+
 
 
 
