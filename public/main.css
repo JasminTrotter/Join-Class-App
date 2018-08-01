@@ -156,11 +156,13 @@ aside {
 
 .deets-container {
 	display: flex;
-	
 	width: 50%;
-
+	position: fixed;
+	top: 15%;
+	left: 25%;
 	margin: auto;
 	z-index: 9999;
+
 }
 
 
@@ -400,6 +402,9 @@ input[type="radio"] {
 	.view-deets {
 		margin-top: 10px;
 	}
+	.deets-container {
+		width: 80%;
+	}
 }
 
 @media all and (max-width: 375px) {
@@ -408,11 +413,24 @@ input[type="radio"] {
 		font-size: 20px;
 	}
 	.panels-container {
-		top: 25%;
+		top: 15%;
 	}
 	.logout-button {
 		font-size: 10px;
 		top: 70px;
+	}
+	.login-container {
+		margin: auto;
+		top: 15%;
+		left: 5%;
+	}
+	.BG {
+		background-position: bottom;
+	}
+	.signup-container {
+		width: 80%;
+		left: 5%;
+		top: 15%;
 	}
 
 }
