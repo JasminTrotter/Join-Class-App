@@ -96,14 +96,16 @@ function renderDeets(data) {
 		<li><h3>Description:</h3> ${winner.description}</li>
 		<li><h3>Duration:</h3> ${winner.length}</li>
 		</ul></aside>`);
-
+	$('.list-container').addClass('hidden');
+	$('.list-container2').addClass('hidden');
 	listenCloseDeets();
 }
 
 function listenCloseDeets() {
 	$('.close-deets').on('click', event => {
 		$('.deets-container').empty();
-		//$('aside').removeClass('deets').addClass('hidden');
+		$('.list-container').removeClass('hidden');
+		$('.list-container2').removeClass('hidden');
 	});
 }
 
@@ -173,7 +175,8 @@ function listenDetailsBtnFromSched() {
 		<li><h3>Description:</h3>${theDeets[1]}</li>
 		<li><h3>Duration:</h3>${theDeets[2]}</li>
 		</ul></aside>`);
-
+	$('.list-container').addClass('hidden');
+	$('.list-container2').addClass('hidden');
 	listenCloseDeets();
 	});
 }
