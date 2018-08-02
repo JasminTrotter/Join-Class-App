@@ -119,8 +119,8 @@ function generateFormInputs() {
 		const input = `<div class="sched-item">	
 
 			<label for="a${i}" class="sched-label">
-			<span><b>${classSchedule[i].class}</b><br>${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}</span>
-			<span class="sched-input"><input id="a${i}" type="radio" name="${classSchedule[i].id}" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}"><span class="select">Select</span></input></span>
+			<span class="class-item"><b>${classSchedule[i].class}</b><br>${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}</span>
+			<span class="sched-input"><input id="a${i}" type="radio" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}"><span class="select">Select</span></input></span>
 
 			</label>
 

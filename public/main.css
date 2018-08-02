@@ -88,7 +88,7 @@ main {
 	position: fixed;
 	overflow: scroll;
 	background: white;
-	top:25%;
+	top:15%;
 	width: 30%;
 	height: 60%;
 	max-height: 500px;
@@ -151,7 +151,6 @@ aside {
 	border: 2px solid #1E5D8A;
 	border-radius: 3px;
 	z-index: 9999;
-	margin-top: 100px;
 }
 
 .deets-container {
@@ -234,6 +233,8 @@ p {
 
 input[type="radio"] {
 	visibility: hidden;
+	width: 0px;
+	margin: 0px;
 
 }
 
@@ -246,7 +247,7 @@ input[type="radio"] {
 	width: 100%;
 	padding: 20px 0;
 	text-align: center;
-
+	margin-left: 10px;
 }
 
 
@@ -364,10 +365,19 @@ input[type="radio"] {
 	h3 {
 		font-size: 18px;
 	}
-	
-	.panels-container {
-		display: block;
+	.list-item {
+		grid-template-columns: 100% ;
 	}
+	.cancel-res {
+		margin-left: 0px;
+		margin-top: 10px;
+	}
+	.view-deets {
+		margin-top: 10px;
+	}
+	/*.panels-container {
+		display: block;
+	}*/
 }
 
 @media all and (max-width: 786px) {
@@ -381,6 +391,28 @@ input[type="radio"] {
 	.signup-container {
 		width: 60%;
 	}
+	.sched-item {
+		display: block;
+		grid-template-columns: 100%;
+	}
+	.sched-label {
+		grid-template-columns: 100%;
+	}
+	.select {
+		margin: 10px 0px;
+		padding: 10px 0px;
+	}
+	.view-deets-2 {
+		margin-left: 0px;
+		width: 100%;
+	}
+
+}
+
+@media all and (max-width: 560px) {
+	.close {
+		font-size: 10px;
+	}
 }
 
 @media all and (max-width: 480px) {
@@ -388,22 +420,31 @@ input[type="radio"] {
 		font-size: 60px;
 		top: -28px;
 	}
-	.list-item {
-		grid-template-columns: 100% ;
+	h2 {
+		font-size: 20px;
 	}
+	.info {
+		font-size: 13px;
+	}
+	
+	/*.list-item {
+		grid-template-columns: 100% ;
+	}*/
 	.logout-button {
 		top: 60px;
 		right: 5%;
 	}
-	.cancel-res {
+	/*.cancel-res {
 		margin-left: 0px;
 		margin-top: 10px;
 	}
 	.view-deets {
 		margin-top: 10px;
-	}
+	}*/
 	.deets-container {
 		width: 80%;
+		top: 15%;
+		left:10%;
 	}
 }
 
