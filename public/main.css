@@ -85,12 +85,12 @@ main {
 }
 
 .login-container {
-	position: fixed;
-	overflow: scroll;
+	position: absolute;
+	/*overflow: scroll;*/
 	background: white;
-	top:15%;
+	top:25%;
 	width: 30%;
-	height: 60%;
+	/*height: 60%;*/
 	max-height: 500px;
 	min-width: 270px;
 	left: 10%;
@@ -151,11 +151,13 @@ aside {
 	border: 2px solid #1E5D8A;
 	border-radius: 3px;
 	z-index: 9999;
+	max-height: 80vh;
+	overflow: scroll;
 }
 
 .deets-container {
 	display: flex;
-	width: 50%;
+	width: 60%;
 	position: fixed;
 	top: 15%;
 	left: 25%;
@@ -462,7 +464,7 @@ input[type="radio"] {
 	}
 	.login-container {
 		margin: auto;
-		top: 15%;
+		top: 25%;
 		left: 5%;
 	}
 	.BG {
@@ -471,10 +473,12 @@ input[type="radio"] {
 	.signup-container {
 		width: 80%;
 		left: 5%;
-		top: 15%;
+		top: 25%;
 	}
 
 }
+
+
 
 
 
