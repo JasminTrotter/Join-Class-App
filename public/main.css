@@ -29,6 +29,8 @@ body {
 	height: 100vh;*/
 }
 
+
+
 header {
 	background: #1E5D8A;
 	color:#FFFFFF;
@@ -114,12 +116,10 @@ main {
 
 .border {
 	background: white;
-
 	padding: 10px;
-	border: 2px solid #4A4A4A;
+	border: 2px solid #CCCCCC;
 	border-radius: 3px;
 }
-
 
 
 .list-item {
@@ -240,7 +240,8 @@ p {
 }
 
 input[type="radio"] {
-	visibility: hidden;
+	/*visibility: hidden;*/
+	opacity: 0;
 	width: 0px;
 	margin: 0px;
 
@@ -296,6 +297,7 @@ input[type="radio"] {
 	padding: 10px;
 	max-height: 40px;
 	margin: auto;
+	position: fixed;
 }
 
 .close {
@@ -424,7 +426,11 @@ input[type="radio"] {
 	}
 	.select {
 		margin: 10px 0px;
-		padding: 10px 0px;
+		padding: 8px 0px;
+		font-size: 12px;
+	}
+	button {
+		font-size: 12px;
 	}
 	.view-deets-2 {
 		margin-left: 0px;
@@ -432,9 +438,12 @@ input[type="radio"] {
 	}
 	.close {
 		font-size: 10px;
+		padding: 3px;
 	}
 
 }
+
+
 
 
 
@@ -447,7 +456,7 @@ input[type="radio"] {
 		font-size: 20px;
 	}
 	.info {
-		font-size: 13px;
+		font-size: 11px;
 	}
 	
 	/*.list-item {
@@ -496,6 +505,99 @@ input[type="radio"] {
 	}
 
 }
+
+@media all and (max-width: 320px) {
+	.panels-container, .login-container, .signup-container {
+		top: 35%;
+	}
+}
+
+@media all and (max-height: 1400px) {
+	.panels-container {
+		top: 20%;
+	}
+}
+
+
+@media all and (max-height: 1200px) {
+	#join-form {
+		height: 25vh;
+		overflow: scroll;
+		border: #CCCCCC solid 2px;
+	}
+}
+
+@media all and (max-height: 800px) {
+	.panels-container {
+		top: 25%;
+	}
+}
+
+
+@media all and (max-height: 736px) {
+	#join-form {
+		min-height: 100px;
+	}
+}
+
+@media all and (max-height: 700px) {
+	.panels-container {
+		top: 30%;
+	}
+	.login-container {
+		top: 30%;
+	}
+}
+
+
+@media all and (max-height: 600px) {
+	.panels-container {
+		top: 35%;
+	}
+	header {
+		max-height: 80px;
+	}
+	h1 {
+		font-size: 50px;
+		top: -25px;
+	}
+	.info {
+		font-size: 11px;
+		margin-top: 2px;
+	}
+	.close {
+		font-size: 10px;
+	}
+	h2 {
+		margin-top: 2px;
+	}
+	button[type="submit"] {
+		margin-top: 20px;
+	}
+}
+
+@media all and (max-height: 500px) {
+	p {
+		margin-top: 20px;
+		font-size: 10px;
+	}
+}
+
+@media all and (max-height: 375px) {
+	header {
+		max-height: 60px;
+	}
+	h1 {
+		font-size: 40px;
+	}
+	.panels-container {
+		top: 30%;
+	}
+	button[type="submit"] {
+		margin-top: 10px;
+	}
+}
+
 
 
 

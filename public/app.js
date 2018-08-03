@@ -120,11 +120,12 @@ function generateFormInputs() {
 
 			<label for="a${i}" class="sched-label">
 			<span class="class-item"><b>${classSchedule[i].class}</b><br>${classSchedule[i].time}, ${classSchedule[i].day}, ${classSchedule[i].date}</span>
-			<span class="sched-input"><input id="a${i}" type="radio" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}"><span class="select">Select</span></input></span>
+			<span class="sched-input"><input required id="a${i}" type="radio" value="${classSchedule[i].class}%${classSchedule[i].time}%${classSchedule[i].day}%${classSchedule[i].date}%${classSchedule[i].location}%${classSchedule[i].description}%${classSchedule[i].length}"><span class="select">Select</span></input></span>
 
 			</label>
 
-			<button type="button" class="view-deets-2" id="${classSchedule[i].class}%${classSchedule[i].description}%${classSchedule[i].length}">Details</button></div>`
+			<button 
+			type="button" class="view-deets-2" id="${classSchedule[i].class}%${classSchedule[i].description}%${classSchedule[i].length}">Details</button></div>`
 		$('#join-form').append(input);
 	}
 	labelListener();
@@ -145,10 +146,10 @@ function listenJoinBtn() {
 	$('.join-class').on('click', function(event){
 		$('.join-class').addClass('hidden');
 		$('.list-container2').removeClass('hidden').addClass('border');
-		$('.list-container2').html(
-			`<button type="button" class="close close-sched"> X Close</button><h2>Class Schedule</h2><p class="info"><em>Select a class from the schedule below <br>Then click "Submit" to add it to your reservations.</em></p>
+		$('.list-container2 .sched-container').html(
+			`<div class="sched-panel"><button type="button" class="close close-sched"> X Close</button><h2>Class Schedule</h2><p class="info"><em>Select a class from the schedule below <br>Then click "Submit" to add it to your reservations.</em></p>
 			<form id="join-form" action="/api/join-a-class" method="post"></form>			
-			<button class="join-form-submit" type="submit" form="join-form">Submit</button>`);
+			<button class="join-form-submit" type="submit" form="join-form">Submit</button></div>`);
 		generateFormInputs();	
 		listenSchedSubmit();
 		listenCloseSched();
@@ -158,7 +159,8 @@ function listenJoinBtn() {
 
 function listenCloseSched() {
 	$('.close-sched').on('click', event => {
-		$('.list-container2').addClass('hidden').removeClass('border');
+		$('.list-container2').removeClass('border');
+		$('.sched-panel').remove();
 		$('.join-class').removeClass('hidden');
 	});
 }
@@ -232,8 +234,8 @@ function postUsersSelection(usersSelection) {
 
 //reset the Join More Classes form after user submits
 function resetJoinForm() {
-	$('.list-container2').empty();
-	$('.list-container2').removeClass('border').addClass('hidden');
+	$('.sched-panel').remove();
+	$('.list-container2').removeClass('border');
 	generateFormInputs();
 }
 
