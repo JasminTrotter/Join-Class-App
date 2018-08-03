@@ -5,7 +5,7 @@ function listenLogin() {
 	$('.login-form').submit(event => {
 		event.preventDefault();
 		let userCreds = {
-      		username: $(".username").val(),
+      		username: $(".username").val().toLowerCase(),
       		password: $(".password").val()
     	};
 
@@ -44,7 +44,7 @@ function listenSignupForm() {
 
     let password = $(".new-password").val();
     let password2 = $(".new-password2").val();
-    let username = $(".new-username").val();
+    let username = $(".new-username").val().toLowerCase();
 
     //if password is too short, show warning
     if (password.length < 10) {
@@ -160,6 +160,7 @@ function loginSuccess(response) {
  	newToken();
  	showReservationList();
   $('.logout-button').removeClass('hidden');
+  $('.join-class').removeClass('hidden');
 }
 
 //listen for when user clicks "Log Out", removes JWT token from local storage, and reloads the page

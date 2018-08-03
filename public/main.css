@@ -105,7 +105,7 @@ main {
 	display: grid;
 	grid-template-columns: 50% 50%;
 	position: absolute;
-	top: 15%;
+	top: 25%;
 	left:10%;
 	margin-right: 20px;
 	overflow: scroll;
@@ -115,7 +115,7 @@ main {
 .border {
 	background: white;
 
-	padding: 20px;
+	padding: 10px;
 	border: 2px solid #4A4A4A;
 	border-radius: 3px;
 }
@@ -198,9 +198,15 @@ button:hover, .select:hover {
 }
 
 
-button[type="submit"], .join-class {
+button[type="submit"] {
 	margin-top: 40px;
 	padding: 10px;
+}
+
+.join-form-submit {
+	background-color: #CCCC18;
+	color: black;
+	margin: 20px;
 }
 
 ul {
@@ -211,8 +217,8 @@ ul {
 li {
 	color:#1E5D8A;
 	background-color:white;
-	margin-bottom: 15px;
-	border: 2px solid #1E5D8A;
+	margin-bottom: 25px;
+	/*border: 2px solid #1E5D8A;*/
 	padding: 15px;
 	margin-left: -40px;
 }
@@ -284,7 +290,15 @@ input[type="radio"] {
 	background: #EDEDED;
 }
 
-.join-class, .close {
+.join-class {
+	background-color: #CCCC18;
+	color: black;
+	padding: 10px;
+	max-height: 40px;
+	margin: auto;
+}
+
+.close {
 	float: right;
 	background-color: #CCCC18;
 	color: black;
@@ -383,11 +397,19 @@ input[type="radio"] {
 }
 
 @media all and (max-width: 786px) {
+	h1 {
+		font-size: 50px;
+		top: -23px;
+	}
+	h2 {
+		font-size: 20px;
+	}
 
 	.panels-container {
 		left: 0%;
 		width: 100%;
 		margin-left: 5px;
+		top: 40%;
 
 	}
 	.signup-container {
@@ -408,14 +430,13 @@ input[type="radio"] {
 		margin-left: 0px;
 		width: 100%;
 	}
-
-}
-
-@media all and (max-width: 560px) {
 	.close {
 		font-size: 10px;
 	}
+
 }
+
+
 
 @media all and (max-width: 480px) {
 	h1 {
@@ -455,9 +476,7 @@ input[type="radio"] {
 	h2 {
 		font-size: 20px;
 	}
-	.panels-container {
-		top: 15%;
-	}
+
 	.logout-button {
 		font-size: 10px;
 		top: 70px;

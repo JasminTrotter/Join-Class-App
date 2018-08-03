@@ -26,7 +26,7 @@ function getReservationData(callback) {
 //and appending them to the Current Reservations list
 function generateListItems(data) {
 	for (let i=0; i<data.length; i++) {		
-		const listItem = `<li class="list-item"><span><b>${data[i].class}</b><br>${data[i].time}, ${data[i].day}, ${data[i].date} </span><button type="button" class="view-deets" id="${data[i].id}">View Details</button><button class="cancel-res" id="${data[i].id}">Cancel Reservation</button></li>`
+		const listItem = `<li class="list-item"><span><b>${data[i].class}</b><br>${data[i].time}, ${data[i].day}, ${data[i].date} </span><button type="button" class="view-deets" id="${data[i].id}">Details</button><button class="cancel-res" id="${data[i].id}">Cancel</button></li>`
 		$('.reservation-list').append(listItem);
 	}
 	listenCancelBtn();
@@ -124,7 +124,7 @@ function generateFormInputs() {
 
 			</label>
 
-			<button type="button" class="view-deets-2" id="${classSchedule[i].class}%${classSchedule[i].description}%${classSchedule[i].length}">View Details</button></div>`
+			<button type="button" class="view-deets-2" id="${classSchedule[i].class}%${classSchedule[i].description}%${classSchedule[i].length}">Details</button></div>`
 		$('#join-form').append(input);
 	}
 	labelListener();
@@ -148,7 +148,7 @@ function listenJoinBtn() {
 		$('.list-container2').html(
 			`<button type="button" class="close close-sched"> X Close</button><h2>Class Schedule</h2><p class="info"><em>Select a class from the schedule below <br>Then click "Submit" to add it to your reservations.</em></p>
 			<form id="join-form" action="/api/join-a-class" method="post"></form>			
-			<button type="submit" form="join-form">Submit</button>`);
+			<button class="join-form-submit" type="submit" form="join-form">Submit</button>`);
 		generateFormInputs();	
 		listenSchedSubmit();
 		listenCloseSched();
