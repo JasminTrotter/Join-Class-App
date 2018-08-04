@@ -183,6 +183,10 @@ button, .select {
 	font-size: 15px;
 }
 
+.select {
+	max-height: 20px;
+}
+
 .view-deets, .view-deets-2 {
 	color: #1E5D8A;
 	background-color: white;
@@ -362,7 +366,7 @@ input[type="radio"] {
 		width: 95vw;
 	}
 	.panels-container {
-		width: 90%;
+		width: 95%;
 		left: 5%;
 	}
 	.login-form > input {
@@ -393,9 +397,9 @@ input[type="radio"] {
 	.view-deets {
 		margin-top: 10px;
 	}
-	/*.panels-container {
-		display: block;
-	}*/
+	.sched-item {
+		margin-right: 60px;
+	}
 }
 
 @media all and (max-width: 786px) {
@@ -418,8 +422,9 @@ input[type="radio"] {
 		width: 60%;
 	}
 	.sched-item {
-		display: block;
+
 		grid-template-columns: 100%;
+		margin-right: 60px;
 	}
 	.sched-label {
 		grid-template-columns: 100%;
@@ -503,12 +508,21 @@ input[type="radio"] {
 		left: 5%;
 		top: 25%;
 	}
+	label {
+		font-size: 12px;
+	}
+	.view-deets-2 {
+		margin-top: 0px;
+	}
 
 }
 
 @media all and (max-width: 320px) {
 	.panels-container, .login-container, .signup-container {
 		top: 35%;
+	}
+	.sched-item {
+		margin-right: 40px;
 	}
 }
 
@@ -521,7 +535,7 @@ input[type="radio"] {
 
 @media all and (max-height: 1200px) {
 	#join-form {
-		height: 25vh;
+		height: 40vh;
 		overflow: scroll;
 		border: #CCCCCC solid 2px;
 	}

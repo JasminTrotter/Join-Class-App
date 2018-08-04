@@ -124,8 +124,8 @@ function generateFormInputs() {
 
 			</label>
 
-			<button 
-			type="button" class="view-deets-2" id="${classSchedule[i].class}%${classSchedule[i].description}%${classSchedule[i].length}">Details</button></div>`
+			<span 
+			type="button" class="view-deets-2 border select" id="${classSchedule[i].class}%${classSchedule[i].description}%${classSchedule[i].length}">Details</button></div>`
 		$('#join-form').append(input);
 	}
 	labelListener();
