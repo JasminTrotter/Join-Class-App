@@ -2,15 +2,14 @@
 
 Join Class allows students to reserve their space in ballet class.
 
-[Login Page](Join-Class-App/public/join-class-screenshots/login-join-class.png)
+<img src="http://i63.tinypic.com/2uyt6k4.png" />
 
-[Signup Page](/Users/Jasmin/Desktop/Join-Class-App/public/join-class-screenshots/signup-join-class.png)
+User can view their current reservations and cancel any as needed... and view the class schedule and sign up for class
+<img src="http://i64.tinypic.com/2yv2tnb.png" />
 
-[User can view their current reservations and cancel any ass needed...](/Users/Jasmin/Desktop/Join-Class-App/public/join-class-screenshots/current-res-join-class.png)
+They can also view class information by clicking "Details"...
+<img src="http://i66.tinypic.com/312v1va.png" />
 
-[and view the class schedule and sign up for class...](/Users/Jasmin/Desktop/Join-Class-App/public/join-class-screenshots/sched-join-class.png)
-
-[They can also view class information by clicking "Details"...](/Users/Jasmin/Desktop/Join-Class-App/public/join-class-screenshots/deets.png)
 
 ## Technologies
 
@@ -28,4 +27,5 @@ Join Class allows students to reserve their space in ballet class.
 
 ### Security
 - JSON Web Tokens (user authentication)
+
 
