@@ -34,7 +34,7 @@ function generateListItems(data) {
 }
 
 
-
+//refreshes the Current Reservations list after the user adds or cancels a reservation
 function refreshReservationList() {
 	$('.app-container').find('.reservation-list').empty();
 	getReservationData(generateListItems);
