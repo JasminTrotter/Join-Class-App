@@ -2,6 +2,12 @@
 
 [Join Class](https://join-class.herokuapp.com) allows students to reserve their space in ballet class.
 
+For a demo, use the following login credentials:
+
+username: DemoUser
+
+password: password12
+
 <img src="http://i63.tinypic.com/2uyt6k4.png" />
 
 User can view their current reservations and cancel any as needed... and view the class schedule and sign up for class
