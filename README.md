@@ -1,6 +1,6 @@
 # Join Class
 
-Join Class allows students to reserve their space in ballet class.
+[Join Class](https://join-class.herokuapp.com) allows students to reserve their space in ballet class.
 
 <img src="http://i63.tinypic.com/2uyt6k4.png" />
 
