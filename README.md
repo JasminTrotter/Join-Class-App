@@ -2,7 +2,7 @@
 
 Join Class allows students to reserve their space in ballet class.
 
-[Login Page](/Users/Jasmin/Desktop/Join-Class-App/public/join-class-screenshots/login-join-class.png)
+[Login Page](Join-Class-App/public/join-class-screenshots/login-join-class.png)
 
 [Signup Page](/Users/Jasmin/Desktop/Join-Class-App/public/join-class-screenshots/signup-join-class.png)
 
@@ -12,4 +12,20 @@ Join Class allows students to reserve their space in ballet class.
 
 [They can also view class information by clicking "Details"...](/Users/Jasmin/Desktop/Join-Class-App/public/join-class-screenshots/deets.png)
 
+## Technologies
+
+### Front End
+- HTML5
+- CSS3
+- JavaScript
+- jQuery
+
+### Back End
+- Node.js + Express.js
+- MLab
+- Mocha + Chai
+- Travis CI
+
+### Security
+- JSON Web Tokens (user authentication)
 
