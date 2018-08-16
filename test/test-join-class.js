@@ -41,7 +41,7 @@ describe('Join Class App', function() {
       .send({username: 'user1', password: 'password12'})
       .then(function(res) {
             return chai.request(app) 
-              .get('/api/current-reservations/5b43d5e3c3b47d220bdc863c')
+              .get('/current-reservations/5b43d5e3c3b47d220bdc863c')
               .set('Authorization', `Bearer ${res.body.authToken}`)
               .then(function(res) {
                 //console.log(res.body);
