@@ -18,7 +18,6 @@ const app = express();
 app.use(morgan('common'));
 
 app.use(express.json());
-//app.use(express.static('public'));
 
 const jwt = require('jsonwebtoken');
 const config = require('./config');
@@ -49,16 +48,14 @@ app.use(express.static(__dirname + '/public'));
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 
+const reservationsRouter = require('./reservationsRouter');
+app.use('/current-reservations/', reservationsRouter);
+
+
+
 //PROTECTED ENDPOINTS
-
 //A protected endpoint to create reservation
-app.post('/api/join-a-class', jwtAuth, (req, res) => {
-//  jwt.verify(req.token, config.JWT_SECRET, (err) => {
-//    if(err) {
-//     res.sendStatus(403);
-//    } else {
-
-//    }
+app.post('/join-a-class', jwtAuth, (req, res) => {
 
   Reservations.create({
     id: req.body.id,
@@ -74,29 +71,6 @@ app.post('/api/join-a-class', jwtAuth, (req, res) => {
   .then((post) => {
     res.json(post.serialize())
   }); 
-});
-
-
-//A protected endpoint to view current reservations
-app.get('/api/current-reservations/:userId', jwtAuth, (req, res) => {
-    Reservations
-    .find({userId: req.params.userId})
-
-    .then( posts => {
-      res.json(posts.map(post => post.serialize()));
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: 'something went terribly wrong' });
-    });
-});
-
-
-
-
-app.delete('/api/current-reservations/:id', jwtAuth, (req, res) => {
-  Reservations.findByIdAndRemove(req.params.id)
-  .then(result => res.json(result))
 });
 
 

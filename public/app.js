@@ -13,7 +13,7 @@ function showReservationList() {
 function getReservationData(callback) {
 	const userId = localStorage.getItem("userId");
 	$.ajax({
-		url: '/api/current-reservations/' + userId,
+		url: '/current-reservations/' + userId,
     	method: 'GET',
     	dataType: 'json',
     	success: callback
@@ -51,7 +51,7 @@ function listenCancelBtn() {
 
 		newToken();
 		$.ajax({
-			url: '/api/current-reservations/' + itemId,
+			url: '/current-reservations/' + itemId,
 			method: "DELETE",
 			success: () => {
 
@@ -148,7 +148,7 @@ function listenJoinBtn() {
 		$('.list-container2').removeClass('hidden').addClass('border');
 		$('.list-container2 .sched-container').html(
 			`<div class="sched-panel"><button type="button" class="close close-sched"> X Close</button><h2>Class Schedule</h2><p class="info"><em>Select a class from the schedule below <br>Then click "Submit" to add it to your reservations.</em></p>
-			<form id="join-form" action="/api/join-a-class" method="post"></form>			
+			<form id="join-form" action="/join-a-class" method="post"></form>			
 			<button class="join-form-submit" type="submit" form="join-form">Submit</button></div>`);
 		generateFormInputs();	
 		listenSchedSubmit();
@@ -217,7 +217,7 @@ function postUsersSelection(usersSelection) {
 	}; 
 
 	const settings = {
-		url: "/api/join-a-class",
+		url: "/join-a-class",
     	method: "POST",
     	data: JSON.stringify(obj),
     	contentType: "application/json", 	
