@@ -27,27 +27,6 @@ var classSchedule = [
 			class: "Barre and Center for Beginners",
 			time: "3pm",
 			day: "Sunday",
-			date: "August 12",
-			location: "Moonstar Dance Studio",
-			description: barreAndCenterDeets.description,
-			length: barreAndCenterDeets.length,
-			formInputId: barreAndCenterDeets.formInputId
-
-		},
-		{
-			class: "Barre and Center for Beginners",
-			time: "3pm",
-			day: "Sunday",
-			date: "August 19",
-			location: "Moonstar Dance Studio",
-			description: barreAndCenterDeets.description,
-			length: barreAndCenterDeets.length,
-			formInputId: barreAndCenterDeets.formInputId
-		},
-		{
-			class: "Barre and Center for Beginners",
-			time: "3pm",
-			day: "Sunday",
 			date: "August 26",
 			location: "Moonstar Dance Studio",
 			description: barreAndCenterDeets.description,
@@ -73,6 +52,37 @@ var classSchedule = [
 			description: barreAndCenterDeets.description,
 			length: barreAndCenterDeets.length,
 			formInputId: barreAndCenterDeets.formInputId
+		},
+		{
+			class: "Barre and Center for Beginners",
+			time: "3pm",
+			day: "Sunday",
+			date: "September 23",
+			location: "Moonstar Dance Studio",
+			description: barreAndCenterDeets.description,
+			length: barreAndCenterDeets.length,
+			formInputId: barreAndCenterDeets.formInputId
+
+		},
+		{
+			class: "Barre and Center for Beginners",
+			time: "3pm",
+			day: "Sunday",
+			date: "September 30",
+			location: "Moonstar Dance Studio",
+			description: barreAndCenterDeets.description,
+			length: barreAndCenterDeets.length,
+			formInputId: barreAndCenterDeets.formInputId
+		},
+		{
+			class: "First Day of Ballet",
+			time: "3pm",
+			day: "Sunday",
+			date: "October 7",
+			location: "Moonstar Dance Studio",
+			description: firstDayOfBalletDeets.description,
+			length: firstDayOfBalletDeets.length,
+			formInputId: firstDayOfBalletDeets.formInputId
 		},
 
 	];
