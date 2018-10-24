@@ -4,9 +4,9 @@
 
 For a demo, use the following login credentials:
 
-username: DemoUser
+username: demouser@joinclass.com
 
-password: password12
+password: password5678
 
 <img src="http://i63.tinypic.com/2uyt6k4.png" />
 
