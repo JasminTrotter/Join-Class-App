@@ -14,6 +14,26 @@ function listenLogin() {
 
 }
 
+//when user clicks `View Demo` button on homepage, box with demo login creds will open.
+function listenDemo() {
+  $('.open-demo').on('click', event => {
+    $('.demo-container').removeClass('hidden');
+    $('.open-demo').addClass('hidden');
+    closeDemo();
+  });
+}
+
+//close Demo login creds box 
+function closeDemo() {
+  $('.close-demo').on('click', event => {
+    $('.demo-container').addClass('hidden');
+    $('.open-demo').removeClass('hidden');
+    listenDemo();
+  });
+}
+
+
+
 //If the user has no account yet, this button will take them to a Sign Up form
 function listenSignupBtn() {
 	$('.signup-button').on('click', event => {
@@ -46,12 +66,13 @@ function listenSignupForm() {
     let password2 = $(".new-password2").val();
     let username = $(".new-username").val().toLowerCase();
 
-    //if password is too short, show warning
+    //signup input validators
     if (password.length < 10) {
       $(".passwarn").html("Password must be at least 10 characters");
     } else if (hasWhiteSpace(username) === true) {
       $(".userwarn").html("Username cannot contain spaces");
-      //if password or username has white space, show warning
+    } else if (validEmail(username) === false) {
+      $(".userwarn").html("Username must be a vaild email");
     } else if (hasWhiteSpace(password) === true) {
       $(".passwarn").html("Password cannot contain spaces");
     }
@@ -73,6 +94,11 @@ function listenSignupForm() {
 //checks if string has white space
 function hasWhiteSpace(string) {
   return string.indexOf(" ") >= 0;
+}
+
+function validEmail(string) {
+  let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(string);
 }
 
 
@@ -154,7 +180,7 @@ function loginFailMessage() {
 
 //if login succeeds, create token and call 
 function loginSuccess(response) {
-	$('.login-container').remove();
+	$('.login-and-demo').remove();
  	localStorage.setItem("TOKEN", response.authToken);
   localStorage.setItem("userId", response.userId);
  	newToken();
@@ -187,6 +213,7 @@ function handleApp() {
   listenLogin();
   listenSignupBtn();
   listenLogout();
+  listenDemo();
 }
 
 $(handleApp);
