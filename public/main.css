@@ -329,6 +329,13 @@ input[type="radio"] {
 	height: 40px;
 }
 
+.demo-container p {
+	font-size: 18px;
+    margin: 5px 5px;
+    position: relative;
+    top: 60px;
+}
+
 
 
 .cancel-res {
