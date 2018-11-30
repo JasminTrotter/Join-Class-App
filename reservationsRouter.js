@@ -33,6 +33,23 @@ router.get('/:userId', jwtAuth, (req, res) => {
     });
 });
 
+router.post('/join-a-class', jwtAuth, (req, res) => {
+
+    Reservations.create({
+      id: req.body.id,
+      class: req.body.class,
+      time: req.body.time, 
+      day: req.body.day,
+      date: req.body.date,
+      location: req.body.location,
+      description: req.body.description,
+      length: req.body.length,
+      userId: req.body.userId
+    })
+    .then((post) => {
+      res.json(post.serialize())
+    }); 
+});
 
 router.delete('/:id', jwtAuth, (req, res) => {
   Reservations.findByIdAndRemove(req.params.id)

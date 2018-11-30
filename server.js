@@ -53,31 +53,6 @@ app.use('/current-reservations/', reservationsRouter);
 
 
 
-//PROTECTED ENDPOINTS
-//A protected endpoint to create reservation
-app.post('/join-a-class', jwtAuth, (req, res) => {
-
-  Reservations.create({
-    id: req.body.id,
-    class: req.body.class,
-    time: req.body.time, 
-    day: req.body.day,
-    date: req.body.date,
-    location: req.body.location,
-    description: req.body.description,
-    length: req.body.length,
-    userId: req.body.userId
-  })
-  .then((post) => {
-    res.json(post.serialize())
-  }); 
-});
-
-
-
-
-
-
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
 // and then assign a value to it in run
